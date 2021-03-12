@@ -60,6 +60,8 @@ Encore
         options.firewall = false;
     })
 
+    .enablePostCssLoader()
+
     // enables Sass/SCSS support
     //.enableSassLoader()
 
