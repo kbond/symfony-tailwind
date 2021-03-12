@@ -1,1 +1,50 @@
 {% extends 'form_div_layout.html.twig' %}
+
+{%- block widget_container_attributes -%}
+    {%- set attr = attr|merge({ class: attr.class|default('') ~ ' sf-tw-form-container' }) -%}
+    {{- parent() -}}
+{%- endblock widget_container_attributes -%}
+
+{%- block widget_attributes -%}
+    {%- set attr = attr|merge({ class: attr.class|default('') ~ ' sf-tw-form-widget' }) -%}
+    {{- parent() -}}
+{%- endblock widget_attributes -%}
+
+{%- block form_row -%}
+    {%- set row_attr = row_attr|merge({ class: row_attr.class|default('') ~ ' sf-tw-form-row' ~ (disabled ? ' sf-tw-form-disabled') ~ (errors|length ? ' sf-tw-form-errors') }) -%}
+    {{- parent() -}}
+{%- endblock form_row -%}
+
+{%- block form_help -%}
+    {%- set help_attr = help_attr|merge({ class: help_attr.class|default('') ~ ' sf-tw-form-help' }) -%}
+    {{- parent() -}}
+{%- endblock form_help -%}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <ul class="sf-tw-form-errors">
+            {%- for error in errors -%}
+                <li class="text-red-700">{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{%- block choice_widget_expanded -%}
+    {%- set attr = attr|merge({ class: attr.class|default('') ~ ' sf-tw-form-choice-expanded' }) -%}
+    <div {{ block('widget_container_attributes') }}>
+        {%- for child in form %}
+            <div class="sf-tw-form-choice-expanded-row">
+                {{- form_widget(child) -}}
+                {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
+            </div>
+        {% endfor -%}
+    </div>
+{%- endblock choice_widget_expanded -%}
+
+{%- block date_widget -%}
+    {%- if widget != 'single_text' -%}
+        {%- set attr = attr|merge({ class: attr.class|default('') ~ ' sf-tw-form-widget-date' }) -%}
+    {%- endif -%}
+    {{- parent() -}}
+{%- endblock date_widget -%}

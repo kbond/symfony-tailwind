@@ -1,0 +1,47 @@
+.sf-tw-form-container {
+    @apply space-y-4;
+}
+
+.sf-tw-form-row label {
+    @apply block text-gray-800;
+}
+
+.sf-tw-form-row.sf-tw-form-disabled .sf-tw-form-widget {
+    @apply border-gray-300 text-gray-500;
+}
+
+.sf-tw-form-row.sf-tw-form-errors .sf-tw-form-widget {
+    @apply border-red-700;
+}
+
+.sf-tw-form-widget {
+    @apply mt-1;
+}
+
+.sf-tw-form-help {
+    @apply mt-1 text-gray-600;
+}
+
+.sf-tw-form-errors li {
+    @apply text-red-700;
+}
+
+.sf-tw-form-choice-expanded {
+    @apply space-y-2 mt-1;
+}
+
+.sf-tw-form-choice-expanded-row {
+    @apply flex items-center space-x-2;
+}
+
+.sf-tw-form-choice-expanded-row .sf-tw-form-widget {
+    @apply mt-0;
+}
+
+.sf-tw-form-widget-date {
+    @apply flex items-center space-x-1 space-y-0 mt-1;
+}
+
+.sf-tw-form-widget-date .sf-tw-form-widget {
+    @apply mt-0;
+}
