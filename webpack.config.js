@@ -55,6 +55,11 @@ Encore
         config.corejs = 3;
     })
 
+    // fix CORS issue with dev server (https://symfony.com/doc/current/frontend/encore/dev-server.html#cors-issues)
+    .configureDevServerOptions(options => {
+        options.firewall = false;
+    })
+
     // enables Sass/SCSS support
     //.enableSassLoader()
 
