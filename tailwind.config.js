@@ -2,7 +2,6 @@ module.exports = {
   purge: {
     content: [
       './assets/**/*.js',
-      './assets/**/*.css',
       './templates/**/*.twig',
     ],
   },
