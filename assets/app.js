@@ -6,6 +6,8 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
+// ** split tailwind into own file to speed up hmr time **
+import './styles/tailwind.css';
 import './styles/app.css';
 
 // start the Stimulus application
