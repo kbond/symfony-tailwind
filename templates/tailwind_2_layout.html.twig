@@ -5,7 +5,7 @@
     {{- parent() -}}
 {%- endblock widget_container_attributes -%}
 
-{% block row_class %}space-y-4{% endblock row_class %}
+{% block row_class %}space-y-6{% endblock row_class %}
 
 {%- block widget_attributes -%}
     {%- set attr = attr|merge({ class: attr.class|default(block('widget_class')) ~ (disabled ? ' ' ~ block('widget_disabled_class')) ~ (errors|length ? ' ' ~ block('widget_errors_class')) }) -%}
@@ -50,7 +50,7 @@
 {%- endblock date_widget -%}
 
 {%- block choice_widget_expanded -%}
-    {%- set attr = attr|merge({ class: attr.class|default('space-y-2 mt-1') }) -%}
+    {%- set attr = attr|merge({ class: attr.class|default('mt-2') }) -%}
     <div {{ block('widget_container_attributes') }}>
         {%- for child in form %}
             <div class="flex items-center space-x-2">
