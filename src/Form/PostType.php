@@ -25,7 +25,7 @@ class PostType extends AbstractType
                     'Technical' => 1,
                     'Miscellaneous' => 2,
                 ],
-                'expanded' => true
+//                'expanded' => true
             ])
             ->add('tags', ChoiceType::class, [
                 'choices' => [
@@ -36,9 +36,11 @@ class PostType extends AbstractType
                 'multiple' => true,
                 'expanded' => true
             ])
-            ->add('date')
-            ->add('published')
+            ->add('date', null, [
+                'widget' => 'single_text'
+            ])
             ->add('body')
+            ->add('published')
         ;
     }
 

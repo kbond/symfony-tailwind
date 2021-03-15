@@ -12,7 +12,7 @@
     {{- parent() -}}
 {%- endblock widget_attributes -%}
 
-{% block widget_class %}mt-1{% endblock widget_class %}
+{% block widget_class %}mt-1 w-full{% endblock widget_class %}
 
 {% block widget_disabled_class %}border-gray-300 text-gray-500{% endblock widget_disabled_class %}
 
@@ -60,3 +60,23 @@
         {% endfor -%}
     </div>
 {%- endblock choice_widget_expanded -%}
+
+{%- block checkbox_row -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+    <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_errors(form) -}}
+        <div class="inline-flex items-center">
+            {{- form_widget(form, widget_attr) -}}
+            {{- form_label(form) -}}
+        </div>
+        {{- form_help(form) -}}
+    </div>
+{%- endblock checkbox_row -%}
+
+{%- block checkbox_widget -%}
+    {%- set attr = attr|merge({ class: attr.class|default('mr-2') }) -%}
+    {{- parent() -}}
+{%- endblock checkbox_widget -%}
