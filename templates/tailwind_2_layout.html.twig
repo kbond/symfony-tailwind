@@ -1,4 +1,4 @@
-{% extends 'form_div_layout.html.twig' %}
+{% use 'form_div_layout.html.twig' %}
 
 {%- block widget_container_attributes -%}
     {%- set attr = attr|merge({ class: attr.class|default(block('row_class')) }) -%}
