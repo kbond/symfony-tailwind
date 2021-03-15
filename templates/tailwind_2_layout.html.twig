@@ -42,13 +42,6 @@
     {%- endif -%}
 {%- endblock form_errors -%}
 
-{%- block date_widget -%}
-    {%- if widget != 'single_text' -%}
-        {%- set attr = attr|merge({ class: attr.class|default('flex space-x-1') }) -%}
-    {%- endif -%}
-    {{- parent() -}}
-{%- endblock date_widget -%}
-
 {%- block choice_widget_expanded -%}
     {%- set attr = attr|merge({ class: attr.class|default('mt-2') }) -%}
     <div {{ block('widget_container_attributes') }}>
