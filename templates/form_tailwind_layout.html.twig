@@ -1,32 +1,36 @@
 {% extends 'form_div_layout.html.twig' %}
 
 {%- block widget_container_attributes -%}
-    {%- if attr.class is not defined -%}
-        {%- set attr = attr|merge({ class: 'space-y-4' }) -%}
-    {%- endif -%}
+    {%- set attr = attr|merge({ class: attr.class|default(block('row_class')) }) -%}
     {{- parent() -}}
 {%- endblock widget_container_attributes -%}
 
+{% block row_class %}space-y-4{% endblock row_class %}
+
 {%- block widget_attributes -%}
-    {%- if attr.class is not defined -%}
-        {%- set attr = attr|merge({ class: 'mt-1'~(disabled ? ' border-gray-300 text-gray-500')~(errors|length ? ' border-red-700') }) -%}
-    {%- endif -%}
+    {%- set attr = attr|merge({ class: attr.class|default(block('widget_class')) ~ (disabled ? ' ' ~ block('widget_disabled_class')) ~ (errors|length ? ' ' ~ block('widget_errors_class')) }) -%}
     {{- parent() -}}
 {%- endblock widget_attributes -%}
 
+{% block widget_class %}mt-1{% endblock widget_class %}
+
+{% block widget_disabled_class %}border-gray-300 text-gray-500{% endblock widget_disabled_class %}
+
+{% block widget_errors_class %}border-red-700{% endblock widget_errors_class %}
+
 {%- block form_label -%}
-    {%- if label_attr.class is not defined -%}
-        {%- set label_attr = label_attr|merge({ class: 'block text-gray-800' }) -%}
-    {%- endif -%}
+    {%- set label_attr = label_attr|merge({ class: label_attr.class|default(block('label_class')) }) -%}
     {{- parent() -}}
 {%- endblock form_label -%}
 
+{% block label_class %}block text-gray-800{% endblock label_class %}
+
 {%- block form_help -%}
-    {%- if help_attr.class is not defined -%}
-        {%- set help_attr = help_attr|merge({ class: 'mt-1 text-gray-600' }) -%}
-    {%- endif -%}
+    {%- set help_attr = help_attr|merge({ class: help_attr.class|default(block('help_class')) }) -%}
     {{- parent() -}}
 {%- endblock form_help -%}
+
+{% block help_class %}mt-1 text-gray-600{% endblock help_class %}
 
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
@@ -39,21 +43,19 @@
 {%- endblock form_errors -%}
 
 {%- block date_widget -%}
-    {%- if widget != 'single_text' and attr.class is not defined -%}
-        {%- set attr = attr|merge({ class: 'flex space-x-1' }) -%}
+    {%- if widget != 'single_text' -%}
+        {%- set attr = attr|merge({ class: attr.class|default('flex space-x-1') }) -%}
     {%- endif -%}
     {{- parent() -}}
 {%- endblock date_widget -%}
 
 {%- block choice_widget_expanded -%}
-    {%- if attr.class is not defined -%}
-        {%- set attr = attr|merge({ class: 'space-y-2 mt-1' }) -%}
-    {%- endif -%}
+    {%- set attr = attr|merge({ class: attr.class|default('space-y-2 mt-1') }) -%}
     <div {{ block('widget_container_attributes') }}>
         {%- for child in form %}
             <div class="flex items-center space-x-2">
-                {{- form_widget(child, {attr: {class: 'mt-0'}}) -}}
-                {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
+                {{- form_widget(child, { attr: { class: 'mt-0' } }) -}}
+                {{- form_label(child, null, { translation_domain: choice_translation_domain }) -}}
             </div>
         {% endfor -%}
     </div>
