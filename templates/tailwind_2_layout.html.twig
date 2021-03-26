@@ -1,42 +1,30 @@
 {% use 'form_div_layout.html.twig' %}
 
-{%- block widget_container_attributes -%}
-    {%- set attr = attr|merge({ class: attr.class|default(block('row_class')) }) -%}
+{%- block form_row -%}
+    {%- set row_attr = row_attr|merge({ class: row_attr.class|default(row_class|default('mb-6')) }) -%}
     {{- parent() -}}
-{%- endblock widget_container_attributes -%}
-
-{% block row_class %}space-y-6{% endblock row_class %}
+{%- endblock form_row -%}
 
 {%- block widget_attributes -%}
-    {%- set attr = attr|merge({ class: attr.class|default(block('widget_class')) ~ (disabled ? ' ' ~ block('widget_disabled_class')) ~ (errors|length ? ' ' ~ block('widget_errors_class')) }) -%}
+    {%- set attr = attr|merge({ class: attr.class|default(widget_class|default('mt-1 w-full')) ~ (disabled ? ' ' ~ widget_disabled_class|default('border-gray-300 text-gray-500')) ~ (errors|length ? ' ' ~ widget_errors_class|default('border-red-700')) }) -%}
     {{- parent() -}}
 {%- endblock widget_attributes -%}
 
-{% block widget_class %}mt-1 w-full{% endblock widget_class %}
-
-{% block widget_disabled_class %}border-gray-300 text-gray-500{% endblock widget_disabled_class %}
-
-{% block widget_errors_class %}border-red-700{% endblock widget_errors_class %}
-
 {%- block form_label -%}
-    {%- set label_attr = label_attr|merge({ class: label_attr.class|default(block('label_class')) }) -%}
+    {%- set label_attr = label_attr|merge({ class: label_attr.class|default(label_class|default('block text-gray-800')) }) -%}
     {{- parent() -}}
 {%- endblock form_label -%}
 
-{% block label_class %}block text-gray-800{% endblock label_class %}
-
 {%- block form_help -%}
-    {%- set help_attr = help_attr|merge({ class: help_attr.class|default(block('help_class')) }) -%}
+    {%- set help_attr = help_attr|merge({ class: help_attr.class|default(help_class|default('mt-1 text-gray-600')) }) -%}
     {{- parent() -}}
 {%- endblock form_help -%}
-
-{% block help_class %}mt-1 text-gray-600{% endblock help_class %}
 
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         <ul>
             {%- for error in errors -%}
-                <li class="text-red-700">{{ error.message }}</li>
+                <li class="{{ error_item_class|default('text-red-700') }}">{{ error.message }}</li>
             {%- endfor -%}
         </ul>
     {%- endif -%}
@@ -46,8 +34,8 @@
     {%- set attr = attr|merge({ class: attr.class|default('mt-2') }) -%}
     <div {{ block('widget_container_attributes') }}>
         {%- for child in form %}
-            <div class="flex items-center space-x-2">
-                {{- form_widget(child, { attr: { class: 'mt-0' } }) -}}
+            <div class="flex items-center">
+                {{- form_widget(child, { attr: { class: 'mr-2' } }) -}}
                 {{- form_label(child, null, { translation_domain: choice_translation_domain }) -}}
             </div>
         {% endfor -%}
