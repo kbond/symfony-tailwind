@@ -43,6 +43,7 @@
 {%- endblock choice_widget_expanded -%}
 
 {%- block checkbox_row -%}
+    {%- set row_attr = row_attr|merge({ class: row_attr.class|default(row_class|default('mb-6')) }) -%}
     {%- set widget_attr = {} -%}
     {%- if help is not empty -%}
         {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
@@ -58,6 +59,6 @@
 {%- endblock checkbox_row -%}
 
 {%- block checkbox_widget -%}
-    {%- set attr = attr|merge({ class: attr.class|default('mr-2') }) -%}
+    {%- set widget_class = widget_class|default('mr-2') -%}
     {{- parent() -}}
 {%- endblock checkbox_widget -%}
